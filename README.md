@@ -1,6 +1,6 @@
 
 
-## SIMPLE SPEECH AI PROJECT
+## SIMPLE SPEECH TO TEXT AI PROJECT
 
 First, install the packages using npm 
 
