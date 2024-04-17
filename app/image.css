@@ -1,0 +1,23 @@
+.container {
+    position: relative;
+  }
+  
+  .image-container {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: slide-down 2s ease forwards;
+  }
+  
+  @keyframes slide-down {
+    0% {
+      transform: translate(-50%, -100%);
+      opacity: 0;
+      
+    }
+    100% {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+  }
