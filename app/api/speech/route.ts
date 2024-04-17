@@ -10,7 +10,6 @@ const hf = new HfInference(process.env.HF_ACCESS_TOKEN, {
     use_cache: true
 });
 
-let responsesData: string | null = null;
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
     try {
@@ -24,22 +23,19 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
         const bytes =  await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        const folder = '/tmp/audio';
+       /* const folder = '/tmp/audio';
         const filepath = path.join(folder, file.name);
 
         //creating new file inside /tmp/audio directory
         fs.writeFileSync(filepath, buffer);
-        const audio = await streamToBuffer(fs.createReadStream(filepath)); //read the file 
+        const audio = await streamToBuffer(fs.createReadStream(filepath)); //read the file  */
 
         const transcription = await hf.automaticSpeechRecognition({
-            data: audio,
+            data: buffer,
             model: 'openai/whisper-large-v3',    
         });
-        fs.unlinkSync(filepath);
+        //fs.unlinkSync(filepath);
 
-        responsesData = transcription.text;
-
-        console.log('responses Data', responsesData);
         return NextResponse.json({ transcription }, { status: 200 });
     } catch (error) {
         console.error(error);
